@@ -7,15 +7,37 @@
 
 import SwiftUI
 
+struct Ocean: Identifiable, Hashable {
+    let name: String
+    let id = UUID()
+}
+
+
+private var oceans = [
+    Ocean(name: "Pacific"),
+    Ocean(name: "Atlantic"),
+    Ocean(name: "Indian"),
+    Ocean(name: "Southern"),
+    Ocean(name: "Arctic")
+]
+
+
+
 struct ContentView: View {
+    
+    @State private var searchText = ""
+    @State private var multiSelection = Set<UUID>()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List(oceans, selection: $multiSelection) {
+                Text($0.name)
+            }
+            .navigationTitle("Ocean")
+            .toolbar { EditButton() }
+            Text("\(searchText)")
         }
-        .padding()
+        .searchable(text: $searchText)
     }
 }
 
