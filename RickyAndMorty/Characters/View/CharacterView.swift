@@ -7,24 +7,24 @@
 
 import SwiftUI
 
-struct SeriesView: View {
+struct CharacterView: View {
+    
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
-            List {
-                
-                ForEach(Constants.TestList, id: \.self) { item in
-                    NavigationLink {
-                        ContentView()
-                    } label: {
-                        Text(item)
-                    }
-                }
-                
-            }
-            .navigationTitle("Series")
-            .toolbar { EditButton() }
-            .background(Color.purple)
+            Text("WARIODDLY")
+            Button(action: {
+              dismiss()
+           }) {
+              Label("Back", systemImage: "arrow.left.circle")
+          }
         }
+        .navigationTitle("Warioddly")
+        .toolbar {
+            Button("More information", action: {})
+        }
+        .background(Color.purple)
     }
 }
 

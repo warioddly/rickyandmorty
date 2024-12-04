@@ -7,22 +7,21 @@
 
 import SwiftUI
 
-struct SeriesView: View {
+struct CharactersView: View {
     var body: some View {
         NavigationStack {
             List {
                 
                 ForEach(Constants.TestList, id: \.self) { item in
                     NavigationLink {
-                        ContentView()
+                        CharacterView()
                     } label: {
                         Text(item)
                     }
                 }
                 
             }
-            .navigationTitle("Series")
-            .toolbar { EditButton() }
+            .navigationTitle("Characters")
             .background(Color.purple)
         }
     }

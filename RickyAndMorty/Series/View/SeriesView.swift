@@ -9,7 +9,21 @@ import SwiftUI
 
 struct SeriesView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                
+                ForEach(Constants.TestList, id: \.self) { item in
+                    NavigationLink {
+                        CharactersView()
+                    } label: {
+                        Text(item)
+                    }
+                }
+                
+            }
+            .navigationTitle("Series")
+            .background(Color.purple)
+        }
     }
 }
 
