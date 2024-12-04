@@ -30,15 +30,49 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List(oceans, selection: $multiSelection) {
-                Text($0.name)
+            List {
+                ForEach(listItems(), id: \.self) { item in
+                    Text(item.name)
+                        .swipeActions(edge: .leading) {
+                            Button(role: .cancel) {
+                                // code to like goes here
+                            } label: {
+                                Label("Favorite", systemImage: "flag")
+                            }
+                            .tint(.indigo)
+                        }
+                        .swipeActions(allowsFullSwipe: false) {
+                            Button(role: .destructive) {
+//                                oceans.remove(item)
+                            } label: {
+                              Label("Delete", systemImage: "trash")
+                            }
+                            
+                            Button {
+                                    
+                              } label: {
+                                Label("Toggle Read", systemImage: "envelope.open.fill")
+                              }
+                            
+                        }
+                }
             }
             .navigationTitle("Ocean")
             .toolbar { EditButton() }
-            Text("\(searchText)")
+            .background(Color.purple)
         }
         .searchable(text: $searchText)
     }
+    
+    
+    private func listItems() -> [Ocean] {
+        return oceans.filter { searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) };
+    }
+    
+    private func deleteItem(at offsets: IndexSet) {
+        oceans.remove(atOffsets: offsets)
+     }
+    
 }
 
 #Preview {
