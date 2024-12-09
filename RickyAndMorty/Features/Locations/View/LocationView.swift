@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct CharacterView: View {
+struct LocationView: View {
     
+    let location: Location
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -26,8 +27,4 @@ struct CharacterView: View {
         }
         .background(Color.purple)
     }
-}
-
-#Preview {
-    SeriesView()
 }

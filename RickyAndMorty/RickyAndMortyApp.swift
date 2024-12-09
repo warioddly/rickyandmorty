@@ -11,7 +11,7 @@ import SwiftUI
 struct RickyAndMortyApp: App {
     var body: some Scene {
         WindowGroup {
-            EpisodesView()
+            HomeView()
         }
     }
 }
