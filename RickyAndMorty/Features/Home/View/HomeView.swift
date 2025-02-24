@@ -20,7 +20,6 @@ struct TabViewItem: Identifiable{
     }
 }
 
-
 struct HomeView: View {
     
     let tabViewItems = [

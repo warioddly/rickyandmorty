@@ -16,7 +16,6 @@ struct EpisodesView: View {
             List(viewModel.episodes) { episode in
                 NavigationLink(
                     destination: EpisodeDetailView(episode: episode)
-                        .toolbar(.hidden, for: .tabBar)
                 ) {
                     VStack (alignment: .leading) {
                         Text(episode.name)
@@ -28,15 +27,24 @@ struct EpisodesView: View {
                     }
                 }
                 .padding(.vertical, 5)
+                .onAppear {
+                        if episode == viewModel.episodes.last {
+                            Task {
+                                await viewModel.loadMoreEpisodes()
+                            }
+                        }
+                }
             }
             .navigationTitle("Episodes")
             .onAppear {
-                viewModel.fetchEpisodes()
+                Task {
+                    await viewModel.fetchEpisodes()
+                }
             }
         }
     }
 }
 
-#Preview {
-    EpisodesView()
-}
+//#Preview {
+//    EpisodesView()
+//}

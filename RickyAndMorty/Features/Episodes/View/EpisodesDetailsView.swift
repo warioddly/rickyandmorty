@@ -14,26 +14,18 @@ struct EpisodeDetailView: View {
     var body: some View {
         NavigationStack {
             
-            Text("Hello \(episode)")
-            
-            if (!episode.characters.isEmpty) {
-                Text("dawd")
+            VStack(alignment: .leading) {
+                Text("Episode \(episode.episode)")
+                Text("Air date \(episode.air_date)")
+                
+                if (!episode.characters.isEmpty) {
+                    NavigationLink(destination: CharactersView(characters: episode.characters)) {
+                        Text("See episode characters")
+                    }
+                }
             }
-            
         }
         .padding(.horizontal)
         .navigationTitle(episode.name)
     }
-}
-
-#Preview {
-    EpisodeDetailView(episode: Episode(
-        id: 1,
-        name: "Rick",
-        episode: "Episode 1",
-        air_date: "12/12/12",
-        characters: [
-            "-"
-        ]
-    ));
 }

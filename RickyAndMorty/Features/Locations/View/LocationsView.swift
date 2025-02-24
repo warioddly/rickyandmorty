@@ -16,7 +16,6 @@ struct LocationsView: View {
             List(viewModel.locations) { location in
                 NavigationLink(
                     destination: LocationView(location: location)
-                        .toolbar(.hidden, for: .tabBar)
                 ) {
                     VStack (alignment: .leading) {
                         Text(location.name)
@@ -28,15 +27,24 @@ struct LocationsView: View {
                     }
                 }
                 .padding(.vertical, 5)
+                .onAppear {
+                    Task {
+                        if location == viewModel.locations.last {
+                            await viewModel.loadMoreLocations()
+                        }
+                    }
+                }
             }
             .navigationTitle("Locations")
             .onAppear {
-                viewModel.fetchLocations()
+                Task {
+                    await viewModel.fetchLocations()
+                }
             }
         }
     }
 }
 
-#Preview {
-    LocationsView()
-}
+//#Preview {
+//    LocationsView()
+//}

@@ -14,17 +14,19 @@ struct LocationView: View {
     
     var body: some View {
         NavigationStack {
-            Text("WARIODDLY")
-            Button(action: {
-              dismiss()
-           }) {
-              Label("Back", systemImage: "arrow.left.circle")
-          }
+            
+            VStack(alignment: .leading) {
+                Text("Dimension \(location.dimension)")
+                Text("Type \(location.type)")
+                
+                if (!location.residents.isEmpty) {
+                    NavigationLink(destination: CharactersView(characters: location.residents)) {
+                        Text("See location residents")
+                    }
+                }
+            }
         }
-        .navigationTitle("Warioddly")
-        .toolbar {
-            Button("More information", action: {})
-        }
-        .background(Color.purple)
+        .padding(.horizontal)
+        .navigationTitle(location.name)
     }
 }
